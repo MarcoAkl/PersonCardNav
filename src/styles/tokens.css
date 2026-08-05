@@ -1,0 +1,162 @@
+:root {
+  color-scheme: light;
+
+  /* Surfaces */
+  --color-bg: #f6f6fb;
+  --color-bg-elevated: #ffffff;
+  --color-bg-subtle: #edeef6;
+  --color-bg-overlay: rgba(20, 20, 35, 0.5);
+
+  /* Borders */
+  --color-border: #e3e4ee;
+  --color-border-strong: #cdd0e0;
+
+  /* Text */
+  --color-text: #17182a;
+  --color-text-secondary: #565973;
+  --color-text-muted: #8b8ea6;
+  --color-text-on-primary: #ffffff;
+
+  /* Brand */
+  --color-primary: #5b3df5;
+  --color-primary-hover: #4a2fe0;
+  --color-primary-active: #3f26c4;
+  --color-primary-soft: #eeebfe;
+  --color-primary-soft-strong: #ded8fd;
+
+  /* Favorite / accent */
+  --color-accent: #e8930b;
+  --color-accent-soft: #fdf1dc;
+  --color-star-fill: #f5a524;
+
+  /* Status */
+  --color-danger: #d1373f;
+  --color-danger-soft: #fbe9ea;
+  --color-success: #1a9b74;
+
+  /* Focus */
+  --color-focus-ring: #5b3df5;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(23, 24, 42, 0.06);
+  --shadow-md: 0 6px 16px -4px rgba(23, 24, 42, 0.12), 0 2px 4px -2px rgba(23, 24, 42, 0.06);
+  --shadow-lg: 0 20px 40px -12px rgba(23, 24, 42, 0.22), 0 4px 10px -4px rgba(23, 24, 42, 0.1);
+  --shadow-focus: 0 0 0 3px rgba(91, 61, 245, 0.35);
+
+  /* Typography */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  --text-xs: 400 12px/16px var(--font-sans);
+  --text-sm: 400 13.5px/20px var(--font-sans);
+  --text-base: 400 15.5px/24px var(--font-sans);
+  --text-md: 500 17px/26px var(--font-sans);
+  --text-lg: 600 20px/28px var(--font-sans);
+  --text-xl: 600 24px/32px var(--font-sans);
+  --text-2xl: 700 30px/38px var(--font-sans);
+  --text-3xl: 700 38px/46px var(--font-sans);
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+  --space-9: 48px;
+  --space-10: 64px;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 999px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+
+  /* Layout */
+  --content-max-width: 1180px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+
+    --color-bg: #0e0e17;
+    --color-bg-elevated: #191a26;
+    --color-bg-subtle: #21222f;
+    --color-bg-overlay: rgba(5, 5, 12, 0.6);
+
+    --color-border: #2c2e3f;
+    --color-border-strong: #3d3f56;
+
+    --color-text: #f1f1f8;
+    --color-text-secondary: #b3b5cc;
+    --color-text-muted: #7d7f9b;
+    --color-text-on-primary: #ffffff;
+
+    --color-primary: #8b7bff;
+    --color-primary-hover: #a396ff;
+    --color-primary-active: #6f5dff;
+    --color-primary-soft: rgba(139, 123, 255, 0.16);
+    --color-primary-soft-strong: rgba(139, 123, 255, 0.28);
+
+    --color-accent: #f2a93c;
+    --color-accent-soft: rgba(242, 169, 60, 0.16);
+    --color-star-fill: #ffbf4d;
+
+    --color-danger: #ff6b70;
+    --color-danger-soft: rgba(255, 107, 112, 0.16);
+    --color-success: #34c795;
+
+    --color-focus-ring: #a396ff;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 6px 20px -4px rgba(0, 0, 0, 0.5), 0 2px 6px -2px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 24px 48px -12px rgba(0, 0, 0, 0.6), 0 6px 14px -4px rgba(0, 0, 0, 0.4);
+    --shadow-focus: 0 0 0 3px rgba(163, 150, 255, 0.4);
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --color-bg: #0e0e17;
+  --color-bg-elevated: #191a26;
+  --color-bg-subtle: #21222f;
+  --color-bg-overlay: rgba(5, 5, 12, 0.6);
+
+  --color-border: #2c2e3f;
+  --color-border-strong: #3d3f56;
+
+  --color-text: #f1f1f8;
+  --color-text-secondary: #b3b5cc;
+  --color-text-muted: #7d7f9b;
+  --color-text-on-primary: #ffffff;
+
+  --color-primary: #8b7bff;
+  --color-primary-hover: #a396ff;
+  --color-primary-active: #6f5dff;
+  --color-primary-soft: rgba(139, 123, 255, 0.16);
+  --color-primary-soft-strong: rgba(139, 123, 255, 0.28);
+
+  --color-accent: #f2a93c;
+  --color-accent-soft: rgba(242, 169, 60, 0.16);
+  --color-star-fill: #ffbf4d;
+
+  --color-danger: #ff6b70;
+  --color-danger-soft: rgba(255, 107, 112, 0.16);
+  --color-success: #34c795;
+
+  --color-focus-ring: #a396ff;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 6px 20px -4px rgba(0, 0, 0, 0.5), 0 2px 6px -2px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 24px 48px -12px rgba(0, 0, 0, 0.6), 0 6px 14px -4px rgba(0, 0, 0, 0.4);
+  --shadow-focus: 0 0 0 3px rgba(163, 150, 255, 0.4);
+}
