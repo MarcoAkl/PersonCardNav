@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
 import { useFavorites } from '../../hooks/useFavorites';
 import { useTheme } from '../../hooks/useTheme';
-import { MoonIcon, StarIcon, SunIcon, UsersIcon } from '../icons';
+import { GridIcon, MoonIcon, StarIcon, SunIcon, UsersIcon } from '../icons';
 import styles from './Header.module.css';
 
 export function Header() {
@@ -28,6 +28,7 @@ export function Header() {
             end
             className={({ isActive }) => clsx(styles.navLink, isActive && styles.navLinkActive)}
           >
+            <GridIcon aria-hidden="true" />
             <span>Directory</span>
           </NavLink>
           <NavLink
