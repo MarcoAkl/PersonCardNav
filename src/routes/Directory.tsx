@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import type { Role } from '../api/types';
-import type { SortField, SortOrder } from '../api/users';
+import { ApiError, type SortField, type SortOrder } from '../api/users';
 import { useUsersQuery } from '../hooks/useUsersQuery';
 import { SearchBar } from '../components/Controls/SearchBar';
 import { RoleFilterSelect } from '../components/Controls/RoleFilterSelect';
@@ -83,7 +83,7 @@ export function Directory() {
       </div>
 
       {isError ? (
-        <ErrorState message={error instanceof Error ? error.message : undefined} onRetry={refetch} />
+        <ErrorState message={error instanceof ApiError ? error.message : undefined} onRetry={refetch} />
       ) : isLoading ? (
         <SkeletonGrid count={LIMIT} />
       ) : !data || data.users.length === 0 ? (
