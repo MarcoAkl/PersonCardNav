@@ -19,9 +19,12 @@ export interface UsersQuery {
 }
 
 class ApiError extends Error {
-  constructor(message: string, readonly status?: number) {
+  status?: number;
+
+  constructor(message: string, status?: number) {
     super(message);
     this.name = 'ApiError';
+    this.status = status;
   }
 }
 

@@ -1,0 +1,15 @@
+.page {
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  font: var(--text-2xl);
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-1);
+}
+
+.subheading {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-6);
+}
