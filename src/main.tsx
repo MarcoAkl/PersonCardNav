@@ -10,6 +10,12 @@ const queryClient = new QueryClient({
     queries: {
       retry: 1,
       refetchOnWindowFocus: false,
+      refetchOnReconnect: 'always',
+      // Default 'online' networkMode pauses queries while navigator.onLine is
+      // false instead of failing them — a genuinely dropped connection would
+      // sit as a silent, un-erroring skeleton/stale grid forever. 'always'
+      // lets the fetch itself fail and surface through the normal error UI.
+      networkMode: 'always',
     },
   },
 });
