@@ -96,6 +96,16 @@ export function GridIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+export function WifiOffIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
+      <path d="M2 2l20 20" />
+      <path d="M8.5 16.5a5 5 0 0 1 5.5-1.08M12 20h.01" />
+      <path d="M5 12.5a11 11 0 0 1 3.5-2.3M19 12.5a11 11 0 0 0-3.4-2.4M2 8.5a15.5 15.5 0 0 1 4.5-2.9M22 8.5a15.5 15.5 0 0 0-8.5-4.4" />
+    </svg>
+  );
+}
+
 export function UsersIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>

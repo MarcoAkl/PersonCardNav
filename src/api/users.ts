@@ -77,3 +77,13 @@ export async function fetchUserById(id: number, signal?: AbortSignal): Promise<U
   }
   return res.json() as Promise<User>;
 }
+
+/** Full dataset (~208 users, ~290KB) for the offline cache — `limit=0` means "no limit". */
+export async function fetchAllUsers(signal?: AbortSignal): Promise<User[]> {
+  const res = await fetch(`${BASE_URL}/users?limit=0`, { signal });
+  if (!res.ok) {
+    throw new ApiError(`Failed to load the full directory (${res.status})`, res.status);
+  }
+  const data = (await res.json()) as UsersResponse<User>;
+  return data.users;
+}

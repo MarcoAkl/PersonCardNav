@@ -12,9 +12,10 @@ const queryClient = new QueryClient({
       refetchOnWindowFocus: false,
       refetchOnReconnect: 'always',
       // Default 'online' networkMode pauses queries while navigator.onLine is
-      // false instead of failing them — a genuinely dropped connection would
-      // sit as a silent, un-erroring skeleton/stale grid forever. 'always'
-      // lets the fetch itself fail and surface through the normal error UI.
+      // false instead of running them at all — the offline/cache fallback in
+      // src/offline/usersRepository.ts (network first, IndexedDB snapshot on
+      // failure) would never even get a chance to run. 'always' lets the
+      // queryFn execute regardless, so it can try the network and fall back.
       networkMode: 'always',
     },
   },

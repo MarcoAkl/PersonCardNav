@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useQueries } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { useFavorites } from '../hooks/useFavorites';
-import { fetchUserById } from '../api/users';
+import { getUserById } from '../offline/usersRepository';
 import { PersonGrid } from '../components/PersonGrid/PersonGrid';
 import { SkeletonGrid } from '../components/SkeletonGrid/SkeletonGrid';
 import { ErrorState } from '../components/StateMessage/ErrorState';
@@ -17,7 +17,7 @@ export function Favorites() {
   const results = useQueries({
     queries: ids.map((id) => ({
       queryKey: ['user', id],
-      queryFn: ({ signal }: { signal: AbortSignal }) => fetchUserById(id, signal),
+      queryFn: ({ signal }: { signal: AbortSignal }) => getUserById(id, signal),
       staleTime: 60_000,
     })),
   });

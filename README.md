@@ -42,6 +42,40 @@ DummyJSON is public and unauthenticated.
 - **clsx** for conditional class composition — tiny, no real alternative considered.
 - **Vitest + React Testing Library** for the (stretch) test suite — same Vite config/transform
   pipeline as the app, no separate bundler to maintain.
+- **vite-plugin-pwa** — generates the service worker that precaches the built app shell (see
+  "Offline support" below). Chosen over hand-rolling a service worker because Workbox (which it
+  wraps) correctly handles precache versioning/invalidation across rebuilds, which is easy to get
+  subtly wrong by hand.
+
+## Offline support
+
+The brief's "kill your network mid-load" requirement is satisfied by a proper error/retry state
+(see below), but the app goes further: search, filter, sort, favoriting, and detail views all
+keep working with no network at all, not just a visible error.
+
+- **Data cache:** DummyJSON's entire dataset is tiny (208 users, ~290KB as full records via
+  `GET /users?limit=0`). On startup — and again on every reconnect — the app fetches that full
+  dataset in the background and stores it in IndexedDB (`src/offline/db.ts`). Every list/search/
+  filter/sort/paginate query and every single-user lookup (`src/offline/usersRepository.ts`) tries
+  the network first; if that fails for any reason, it re-runs the exact same query
+  (`src/offline/localQuery.ts`, unit-tested) against the IndexedDB snapshot instead of erroring.
+  Because the *whole* dataset is cached up front rather than only pages you've visited, a detail
+  page you've never opened before still resolves offline, and the favorites view (which fetches
+  each saved id independently) does too.
+- **App shell cache:** IndexedDB alone doesn't help if the tab itself can't load — a hard refresh
+  or a fresh tab opened while offline needs the HTML/JS/CSS to come from somewhere. `vite-plugin-pwa`
+  generates a service worker that precaches the built assets, so the app shell loads offline too.
+  This only takes effect on the production build (`npm run build && npm run preview`) — Vite's dev
+  server serves hundreds of unbundled ES module files that don't precache the same way, so a
+  hard-reload-while-offline test needs `npm run preview`, not `npm run dev`.
+- **Honesty about it:** a slim banner (`OfflineBanner`) appears whenever `navigator.onLine` is
+  false, so the app never silently pretends to be live — you know you're looking at a cached
+  snapshot. Favoriting itself never touched the network to begin with (pure `localStorage`), so
+  that half of "favorite ... when offline" was already true before any of this was built.
+- **Known trade-off:** the local search match (substring across first/last/maiden name, email,
+  company) is a reasonable approximation of DummyJSON's real search endpoint, not a byte-identical
+  reimplementation — offline search results can differ slightly from online search results for
+  unusual queries.
 
 ## Design direction
 
@@ -87,8 +121,10 @@ alongside the light one in the same token file.
 
 ## What I'd build next
 
-- Deploy it (Vercel/Netlify) — not done here since this environment has no hosting credentials.
-  `npm run build` produces a static `dist/` that deploys as-is to either with zero config.
+- Deploy it (Vercel/Netlify) — `netlify.toml` is already in the repo (build command, publish dir,
+  and the SPA catch-all redirect client-side routing needs), so connecting the repo on Netlify is
+  the only remaining step; actually creating/authenticating that hosting account wasn't done from
+  this environment.
 - Component tests beyond the two trickiest pieces of logic — e.g. `Pagination`'s page-window
   algorithm, and an integration test of `Directory` driving `useSearchParams` end-to-end.
 - Debounce-cancel-in-flight requests more aggressively (react-query already dedupes/aborts via

@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchUserById } from '../api/users';
+import { getUserById } from '../offline/usersRepository';
 
 export function useUserQuery(id: number | undefined) {
   return useQuery({
     queryKey: ['user', id],
-    queryFn: ({ signal }) => fetchUserById(id as number, signal),
+    queryFn: ({ signal }) => getUserById(id as number, signal),
     enabled: id !== undefined && Number.isFinite(id),
   });
 }
